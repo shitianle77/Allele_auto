@@ -257,10 +257,12 @@ The two core input files are of the Count and TPM expression matrices for the al
 
 The count matrix has the following format, and the TPM matrix has the same format.
 
-|Output files|Description|
-|---|---|
-|SA_SB.collinearity.txt|Improved collinearity (For details, see https://wgdi.readthedocs.io/en/latest/collinearity.html)|
-
+|Allele_ID|SA_s1_1|SA_s1_2|SA_s1_3|SA_s2_1|SA_s2_2|SA_s2_3|...|SB_s1_1|SB_s1_2|SB_s1_3|SB_s2_1|SB_s2_2|SB_s2_3|...|
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+|allele1A_allele1B|0|0|0|0|0|0|...|0|0|0|0|0|0|...|
+|allele2A_allele2B|0|0|0|0|0|0|...|0|0|0|0|0|0|...|
+|allele3A_allele3B|780.324|906.261|796.327|0|0|0|...|712.676|832.739|733.673|0|0|0|...|
+|...|||||||||||||||
 
 SA_s1_1: The first repeat (1) of the allele of subgenome A (SA) in sample1 (s1).
 
@@ -364,8 +366,8 @@ In the subcommands tpm_boxplot.r (line 27) and kaks_boxplot.r (lines 28,43 and 5
 
 ## Reference
 Lehmann, R. (2013). 3σ-rule for outlier detection from the viewpoint of geodetic adjustment. Journal of Surveying Engineering, 139(4), 157-165. doi:10.1061/(ASCE)SU.1943-5428.0000112
-
-
+Sun, P., et al. (2022). WGDI: A user-friendly toolkit for evolutionary analyses of whole-genome duplications and ancestral karyotypes. Molecular Plant, 15(12), 1841-1851. doi:10.1016/j.molp.2022.10.018
+Chen, Y., et al. (2020). A collinearity-incorporating homology inference strategy for connecting emerging assemblies in the triticeae tribe as a pilot practice in the plant pangenomic era. Molecular Plant, 13(12), 1694-1708. doi:10.1016/j.molp.2020.09.019
 
 
 
