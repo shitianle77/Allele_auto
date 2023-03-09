@@ -101,7 +101,7 @@ Here we have described in details on formats of the input files and the output f
 
 ### 4.1 Files for the procedure of allele identification
 
-**- Input files**
+- **Input files**
 
 (1) One such input file is of the homologous chromosome grouping.
 
@@ -162,7 +162,6 @@ cat SB.fa
 # >chr02B
 # aaaccctaaaccctaaaccctaaaccctaaacccTAAACCCTAAACCCTAAACCCTAAACCCTAAAC… 
 ```
-
 We also have to prepare input files of genes (in bed format, for example: SA.bed and SB.bed) and chromosome length information (SA.len and SB.len), which can be obtained from the genome assembly and annotation of the haplotype (two subgenomes for a haplotype-resolved genome assembly of a diploid species) genomes.
 
 (1) prepare bed file from gff file of subgenomes A and B (This is done by using the JCVI)
@@ -171,9 +170,85 @@ We also have to prepare input files of genes (in bed format, for example: SA.bed
 python -m jcvi.formats.gff bed --type=gene --key=ID SA.gff3 -o SA.bed
 python -m jcvi.formats.gff bed --type=gene --key=ID SB.gff3 -o SB.bed
 ```
-
 Output files: SA.bed SB.bed. column are chromosome, start location, end location, gene ID, score, and strand.
+
 **Note:** For some annotations, the fourth column of bed contains some strings, such as gene:, ID:, etc., which we should delete.
+
+**Get an example of such input by executing the following commands:**
+
+```
+cat SA.bed
+# chr01A	16570	20155	PAxG01Ag0000100	0	-
+# chr01A	40601	47447	PAxG01Ag0000200	0	-
+
+cat SB.bed
+# chr01B	39112	40364	PAxG01Bg0000100	0	-
+# chr01B	47342	49123	PAxG01Bg0000200	0	+
+```
+
+(2) prepare the file of chromosome length of two subgenomes A and B
+
+```
+python generate_conf.py -p SA SA.fa SA.gff3
+python generate_conf.py -p SB SB.fa SB.gff3
+```
+Output files: SA.len SB.len SA.gff SB.gff (The gff files are used for subsequent filtering.)
+
+```
+cat SA.len
+# chr01A	50794782	4038
+# chr02A	24505410	2307
+
+cat SB.len
+# chr01B	51099886	4086
+# chr02B	27466271	2296
+```
+Columns are chromosome, length of chromosome and number of chromosome genes.
+
+
+```
+cat SA.gff
+# chr01A	PAxG01Ag0000100 16571	20155	-	1	PAxG01Ag0000100.1
+# chr01A	PAxG01Ag0000200 40602	47447	-	2	PAxG01Ag0000200.1
+
+cat SB.gff
+# chr01B	PAxG01Bg0000100	39113	40364	-	1	PAxG01Bg0000100.1
+# chr01B	PAxG01Bg0000200	47343	49123	+	2	PAxG01Bg0000200.1
+```
+Each column is chromosome number, gene name, start location, end location, strand, order of each chromosome (starting from 1) and original id and not read.
+
+For more information, please refer to: https://wgdi.readthedocs.io/en/latest/usage.html 
+
+- **Output files**
+
+**The expected output files are written in different folders. Here, we have “**raw_RBH.genepairs**”, “**RBH.genepairs**”, and “**SA_SB.blast**” in the “**01_genetribe**” folder, and we have “**SA_SB.collinearity.txt**”, “**SA_SB.ks.txt**”, “**SA_SB_block.csv**”, “**block.tsv**”, “**filtered.block.tsv**”, “**genepairs_info.tsv**”, “**filtered.genepairs_info.tsv**”, and “**allele_pairs_lasted.txt**” in the “**02_wgdi**” folder.**
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
