@@ -281,14 +281,89 @@ cat allelepairs.count_selected.txt
 - **Output files**
 **The expected output files are written in different folders. Here, we have** “pairs.genelist”**,** “name_list.txt”**,** “AvsB.”**,** “stats_number/”**,** **and** “High_expression/” **in the** “03_DEG/1_Class_alleles” **folder, and we have** “.name”**,** “.tpm”**,** “tpm.box.txt”**,** “tpm_boxplot.pdf” **in the** “03_DEG/2_Diff_comparison” **folder, and also** “all.kaks” **and** “.pdf”**, in the “KaKs” folder.**
 
+```
+cd 03_DEG/1_Class_alleles
+```
+
+|Output files|Description|
+|---|---|
+|pairs.genelist|Allele pairs|
+|name_list.txt|Name of samples|
+|AvsB.|Differentially expressed alleles in all samples of subgenomes A and B, respectively (“up” represents alleles that are highly expressed in subgenome A compared to subgenome B.)|
+|stats_number/|Multiple statistics of allele expression in different tissues or treatments|
+|High_expression/|The number of highly expressed alleles in each chromosome|
+
+```
+cd 03_DEG/2_Diff_comparison
+cd TPM
+```
+
+|Output files|Description|
+|---|---|
+|.name|The pairs of differentially expressed alleles in Diff0, Diff2 and Diff8|
+|.tpm|TPM values of differentially expressed allele pairs in Diff0, Diff2 and Diff8|
+|tpm.box.txt|Summary of tpm values for the differentially expressed alleles in each group (Diff0, Diff2 and Diff8)|
+|stats_number/|Multiple statistics of allele expression in different tissues or treatments|
+|tpm_boxplot.pdf|Distribution diagram of alleles with different differential expression folds under each group (Diff0, Diff2 and Diff8)|
+
+```
+cd KaKs
+```
+
+|Output files|Description|
+|---|---|
+|all.kaks|Summary of Ka, Ks and Ka/Ks values between allele pairs in each group (Diff0, Diff2 and Diff8)|
+|.pdf|Distribution diagram of Ka, Ks and Ka/Ks between allele pairs in  each group (Diff0, Diff2 and Diff8)|
+
+References to different file formats in bioinformatics:
+
+fasta: https://en.wikipedia.org/wiki/FASTA_format 
+
+gff: https://en.wikipedia.org/wiki/General_feature_format 
+
+bed: https://en.wikipedia.org/wiki/BED_(file_format)
+
+## 5 Parameter setting
+
+### 5.1 Parameter setting in the allele identification step
+
+```
+bash ./bin/allele_identification.sh -p chrpairs.txt -a SA -b SB
+```
+
+|Parameter|Description|
+|---|---|
+|-p|Necessary parameter. the target chromosome list|
+|-a|Necessary parameter. name of subgenome A|
+|-b|Necessary parameter. name of subgenome B.|
+|-h|Print brief help message|
+
+**Note:** The names of the subgenomes and the prefixes of the input files must be the same. (eg: If -a is SA, the input file will be SA.pep; if -a is SubgenomeA, the input file will be SubgenomeA.pep.)
+
+The parameter setting requirements in 5.2 are the same.
+
+### 5.2 Parameter setting in the allele specific expression step
+
+```
+bash ./bin/allele_specific_expression.sh -a SA -b SB -c allelepairs.count_selected.txt -t allelepairs.tpm_selected.txt -s 102
+```
+
+|Parameter|Description|
+|---|---|
+|-a|Necessary parameter. name of subgenome A|
+|-b|Necessary parameter. name of subgenome B|
+|-c|Necessary parameter. count matrix of allele pairs|
+|-t|Necessary parameter. tpm matrix of allele pairs|
+|-s|Necessary parameter. number of samples|
+|-h|Print brief help message|
+
+## 6 Note
+
+In the subcommands tpm_boxplot.r (line 27) and kaks_boxplot.r (lines 28,43 and 58) of allele_specific_expression.sh, users can adjust according to their actual results if necessary.
 
 
-
-
-
-
-
-
+## Reference
+Lehmann, R. (2013). 3σ-rule for outlier detection from the viewpoint of geodetic adjustment. Journal of Surveying Engineering, 139(4), 157-165. doi:10.1061/(ASCE)SU.1943-5428.0000112
 
 
 
