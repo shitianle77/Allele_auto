@@ -221,22 +221,65 @@ For more information, please refer to: https://wgdi.readthedocs.io/en/latest/usa
 
 - **Output files**
 
-**The expected output files are written in different folders. Here, we have “**raw_RBH.genepairs**”, “**RBH.genepairs**”, and “**SA_SB.blast**” in the “**01_genetribe**” folder, and we have “**SA_SB.collinearity.txt**”, “**SA_SB.ks.txt**”, “**SA_SB_block.csv**”, “**block.tsv**”, “**filtered.block.tsv**”, “**genepairs_info.tsv**”, “**filtered.genepairs_info.tsv**”, and “**allele_pairs_lasted.txt**” in the “**02_wgdi**” folder.**
+**The expected output files are written in different folders. Here, we have** “raw_RBH.genepairs”**,** “RBH.genepairs”**,** **and** “SA_SB.blast” **in the** “01_genetribe” **folder,** **and we have** “SA_SB.collinearity.txt”**,** “SA_SB.ks.txt”**,** “SA_SB_block.csv”**,** “block.tsv”**,** “filtered.block.tsv”**,** “genepairs_info.tsv”**,** “filtered.genepairs_info.tsv”**,** **and** “allele_pairs_lasted.txt” **in the** “02_wgdi” **folder.**
+
+**Get into different folders for details, by executing the following commands:**
+```
+cd 01_genetribe
+```
+|Output files|Description|
+|---|---|
+|raw_RBH.genepairs|Gene pairs belonging to the Reciprocal Best Hits (RBH)|
+|RBH.genepairs|List of gene pairs belonging to RBH|
+|SA_SB.blast|Blast information for gene pairs belonging to RBH|
+
+For more information, please refer to: https://chenym1.github.io/genetribe/tutorial/fileformats.html
+
+```
+cd 02_wgdi
+```
+|Output files|Description|
+|---|---|
+|SA_SB.collinearity.txt|Improved collinearity (For details, see https://wgdi.readthedocs.io/en/latest/collinearity.html)|
+|SA_SB.ks.txt|Non-synonymous (Ka) and synonymous (Ks) (For details, see https://wgdi.readthedocs.io/en/latest/ks.html)|
+|SA_SB_block.csv|BlockInfo (For details, see https://wgdi.readthedocs.io/en/latest/blockinfo.html)|
+|block.tsv|BlockInfo (Same as SA_SB_block.csv, separated by tab)|
+|filtered.block.tsv|Filtered blocks information|
+|genepairs_info.tsv|Details of allele pairs on blocks (Position and Ks information)|
+|filtered.genepairs_info.tsv|Details of filtered allele pairs on blocks (Position and Ks information)|
+|allele_pairs_lasted.txt|The final allele pairs identified|
+
+### 4.2 Files for computation of allele-specific expression
+
+- **Input files**
+
+The two core input files are of the Count and TPM expression matrices for the allele pairs.
+
+The count matrix has the following format, and the TPM matrix has the same format.
+
+|Output files|Description|
+|---|---|
+|SA_SB.collinearity.txt|Improved collinearity (For details, see https://wgdi.readthedocs.io/en/latest/collinearity.html)|
 
 
+SA_s1_1: The first repeat (1) of the allele of subgenome A (SA) in sample1 (s1).
 
+SB_s2_3: The third repeat (3) of the allele of subgenome B (SB) in sample2 (s2).
 
+**Here is one example (The count values of allele pairs in the three replicates of the first sample.):**
 
+```
+cd ./00_data/RNA_seq
+cat allelepairs.count_selected.txt
+# PAxG01Ag0000300_PAxG01Bg0000100		0	0	0	0	0	0
+# PAxG01Ag0000400_PAxG01Bg0000200		0	0	0	0	0	0
+# PAxG01Ag0000700_PAxG01Bg0000400		780.324	906.261	796.327	712.676	832.739	733.67
+# PAxG01Ag0000800_PAxG01Bg0000500		1533.223	1573.857	1557.604	898.777	1141.143	875.396
+# PAxG01Ag0000900_PAxG01Bg0000600		0	0	0	0	14	1
+```
 
-
-
-
-
-
-
-
-
-
+- **Output files**
+**The expected output files are written in different folders. Here, we have** “pairs.genelist”**,** “name_list.txt”**,** “AvsB.”**,** “stats_number/”**,** **and** “High_expression/” **in the** “03_DEG/1_Class_alleles” **folder, and we have** “.name”**,** “.tpm”**,** “tpm.box.txt”**,** “tpm_boxplot.pdf” **in the** “03_DEG/2_Diff_comparison” **folder, and also** “all.kaks” **and** “.pdf”**, in the “KaKs” folder.**
 
 
 
