@@ -366,7 +366,9 @@ In the subcommands tpm_boxplot.r (line 27) and kaks_boxplot.r (lines 28,43 and 5
 
 ## Reference
 Lehmann, R. (2013). 3σ-rule for outlier detection from the viewpoint of geodetic adjustment. Journal of Surveying Engineering, 139(4), 157-165. doi:10.1061/(ASCE)SU.1943-5428.0000112
+
 Sun, P., et al. (2022). WGDI: A user-friendly toolkit for evolutionary analyses of whole-genome duplications and ancestral karyotypes. Molecular Plant, 15(12), 1841-1851. doi:10.1016/j.molp.2022.10.018
+
 Chen, Y., et al. (2020). A collinearity-incorporating homology inference strategy for connecting emerging assemblies in the triticeae tribe as a pilot practice in the plant pangenomic era. Molecular Plant, 13(12), 1694-1708. doi:10.1016/j.molp.2020.09.019
 
 
