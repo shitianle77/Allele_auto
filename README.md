@@ -86,7 +86,10 @@ The software is divided into two main sections, allele identification and allele
 
 Before the official start, users need to modify them:
 
-(1)	Once genetribe has been successfully installed, you will need to go into the ~/genetribe/bin directory and modify the penultimate line in core to remove the “#”.
+(1)	Once genetribe has been successfully installed, you will need to go into the ~/genetribe/bin directory and modify the penultimate line in core to add the “#”.
+```
+sed -i 's/rm -rf output/#rm -rf output/'  yourgenetribepath/genetribe/bin/core
+```
 
 (2)	In the script ./bin/allele_identification.sh, 195 lines need to be replaced with the user's environment.
 
