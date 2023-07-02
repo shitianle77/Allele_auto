@@ -74,7 +74,7 @@ bash ./bin/allele_specific_expression.sh -h
 
 ## 3 Quick Start
 
-We provide example files in the test folder. Here we show steps on running a simple computation with this pipeline. We expect this may help users to quickly get familiar with this pipeline.
+We have stored the ginger sample data in the test folder. In this tutorial, we illustrate the procedures for conducting elementary calculations utilizing this pipeline. Our objective is to assist users in rapidly familiarizing themselves with functions of the pipeline.
 
 ```
 cd Allele_auto
@@ -122,48 +122,52 @@ cat chrpairs.txt
 
 ```
 cat SA.pep
-# >PAxG01Ag0000100
-# MLGIIGLLETKVISAQMETVITNLQLPSWNFISNINASSSCRVIVGWDPTMFRISCLHNSDQ
+# >Zo_SA_chr01A_1
+# MNNASPSAAEPNSHALALPNPSSPLKDRSTYTNLKEHLLRPAGNNLWSPPVSKRATAGSK
 
 cat SB.pep
-# >PAxG01Bg0000100
-# MHRAAGGFGGLRINSRLLIPVPYADPEDDYTVILNDWYTSSHATLRKYLDDGRSLARPTG
+# >Zo_SB_chr01B_1
+# MITTRFFPHSRFFLPSHLPTLCRPIHSGAAHPRITRSELVDRICRILTLERFHAIPKLPFRFSDD
 
 cat SA.cds
-# >PAxG01Ag0000100
-# ATGCTGGGTATCATTGGTCTGCTGGAAACTAAGGTTATATCAGCCCAAATGGAGACTGTTATCACTAATTTACAGCTACCTTCTTGGAATTTTATTTCAAATATAAATGCCTCCTCTAGCTGTCGGGTGATTGTGGGATGGGATCCTACAATGTTTCGTATTTCTTGTCTGCATAATTCT
+# >Zo_SA_chr01A_1
+# ATGAATAATGCAAGTCCATCTGCTGCAGAACCCAACTCACACGCACTTGCTCTTCCTAATCCTTCTTCCCCACTTAAAGACCGTTCTACATATACTAACTTAAAAGAACATCTCTTGAGACCAGCAGGGAACAATCTCTGGTCGCCACCAGTCAGCAAGCGAGCGACAGCCGGGAG
 
 cat SB.cds
-# >PAxG01Bg0000100
-# ATGCACCGTGCAGCTGGAGGCTTTGGCGGCCTTCGCATCAACAGCCGCCTACTCATCCCTGTACCTTATGCTGATCCCGAGGATGACTACACCGTCATACTTAATGACTGGTATACCAGCAGCCACGCCACTCTCAGGAAATACTTGGATGACGGCCGCTCTCTTGCAAGGCCTAC
+# >Zo_SB_chr01B_1
+# TGATCACAACTAGATTCTTCCCTCATTCGCGTTTCTTCCTCCCCTCGCACCTGCCCACTCTCTGCCGGCCCATCCACTCCGGCGCTGCCCACCCCCGCATCACCAGATCTGAGCTCGTCGACCGGATATGCCGCATCCTCACCCTCGAGCGCTTCCACGCCATTCCCAAGCTTCCC
 
 cat SA.gff3
-# chr01A  maker  gene  16571  20155  .  -  .  ID=PAxG01Ag0000100;Name=maker-chr01A:1-4000000-exonerate_protein2genome-gene-0.103;Alias=maker-chr01A:1-4000000
-# chr01A  maker  mRNA  16571  20155  1782.0  -  .  ID=PAxG01Ag0000100.1;Parent=PAxG01Ag0000100;Name=maker-chr01A:1-4000000-exonerate_protein2genome-gene-0.103-mRNA-1
-# chr01A  maker  exon  16571  17453  .  -  .  ID=maker-chr01A:1-4000000-exonerate_protein2genome-gene-0.103-mRNA-1:exon:2101;Parent=PAxG01Ag0000100.1
-# chr01A  maker  exon  19257  20155  .  -  .  ID=maker-chr01A:1-4000000-exonerate_protein2genome-gene-0.103-mRNA-1:exon:2100;Parent=PAxG01Ag0000100.1
-# chr01A  maker  CDS  19257  20155  .  -  0  ID=maker-chr01A:1-4000000-exonerate_protein2genome-gene-0.103-mRNA-1:cds;Parent=PAxG01Ag0000100.1
-# chr01A  maker  CDS  16571  17453  .  -  1  ID=maker-chr01A:1-4000000-exonerate_protein2genome-gene-0.103-mRNA-1:cds;Parent=PAxG01Ag0000100.1
+# chr01A	maker	gene	1954	4056	.	+	.	ID=Zioff01G0000100;Name=Zioff01G0000100
+# chr01A	maker	mRNA	1954	4056	.	+	.	ID=Zioff01G0000100.1;Parent=Zioff01G0000100;Name=Zioff01G0000100.1;
+# chr01A	maker	exon	1954	2105	.	+	.	ID=Zioff01G0000100.1:exon:1170;Parent=Zioff01G0000100.1
+# chr01A	maker	exon	3204	4056	.	+	.	ID=Zioff01G0000100.1:exon:1171;Parent=Zioff01G0000100.1
+# chr01A	maker	CDS	1954	2105	.	+	0	ID=Zioff01G0000100.1:cds;Parent=Zioff01G0000100.1
+# chr01A	maker	CDS	3204	4056	.	+	1	ID=Zioff01G0000100.1:cds;Parent=Zioff01G0000100.1
 
 cat SB.gff3
-# chr01B  maker  gene  39113  40364  .  -  .  ID=PAxG01Bg0000100;Name=maker-chr01B:1-4000000-augustus-gene-0.16;Alias=maker-chr01B:1-4000000
-# chr01B  maker  mRNA  39113  40364  .  -  .  ID=PAxG01Bg0000100.1;Parent=PAxG01Bg0000100;Name=maker-chr01B:1-4000000-augustus-gene-0.16-mRNA-1
-# chr01B  maker  exon  39522  40364  .  -  .  ID=maker-chr01B:1-4000000-augustus-gene-0.16-mRNA-1:exon:416;Parent=PAxG01Bg0000100.1
-# chr01B  maker  exon  39113  39118  .  -  .  ID=maker-chr01B:1-4000000-augustus-gene-0.16-mRNA-1:exon:415;Parent=PAxG01Bg0000100.1
-# chr01B  maker  CDS  39522  40364  .  -  0  ID=maker-chr01B:1-4000000-augustus-gene-0.16-mRNA-1:cds;Parent=PAxG01Bg0000100.1
-# chr01B  maker  CDS  39113  39118  .  -  0  ID=maker-chr01B:1-4000000-augustus-gene-0.16-mRNA-1:cds;Parent=PAxG01Bg0000100.1
+# chr01B	maker	gene	2566	8399	.	+	.	ID=Zioff01G0466400;Name=Zioff01G0466400
+# chr01B	maker	mRNA	2566	8399	.	+	.	ID=Zioff01G0466400.1;Parent=Zioff01G0466400;Name=Zioff01G0466400.1
+# chr01B	maker	exon	2566	2954	.	+	.	ID=Zioff01G0466400.1:exon:1;Parent=Zioff01G0466400.1
+# chr01B	maker	CDS	2680	2954	.	+	0	ID=Zioff01G0466400.1:cds;Parent=Zioff01G0466400.1
+# chr01B	maker	CDS	3045	5487	.	+	1	ID=Zioff01G0466400.1:cds;Parent=Zioff01G0466400.1
+# chr01B	maker	exon	3045	5487	.	+	.	ID=Zioff01G0466400.1:exon:2;Parent=Zioff01G0466400.1
+# chr01B	maker	CDS	5845	5918	.	+	0	ID=Zioff01G0466400.1:cds;Parent=Zioff01G0466400.1
+# chr01B	maker	exon	5845	5918	.	+	.	ID=Zioff01G0466400.1:exon:3;Parent=Zioff01G0466400.1
+# chr01B	maker	CDS	7760	7949	.	+	1	ID=Zioff01G0466400.1:cds;Parent=Zioff01G0466400.1
+# chr01B	maker	exon	7760	8399	.	+	.	ID=Zioff01G0466400.1:exon:4;Parent=Zioff01G0466400.1
 
 cat SA.fa
 # >chr01A
-# aaaccctaaaccctaaaccctaaaccctaaaCCCTAAACCCTAAACCCTAAACCCTAAaCCCTAAA…
+# taGCAAGTTGTTTTACCTAATTTATTTTAATGTTAAATATTTAGTATTTGTTGATAAAAA…
 # >chr02A
-# acccTAAACCCTAAACCCTAAACCCTAAACCCTTAAACCCTAAACCCTAAACCCTA…
+# caccggcggccggaggagttggggcggattgcaggactttggacccagCGCCGGCGCCTCCTTCGCATGGGA…
 
 cat SB.fa
 # >chr01B
-# taaaccctaaaccctaaaccctaaaccctaaaccctaaaCCCTAAACCCTAAACCCTAAACCCTAAACC…
+# ccaaatagttgatactacttgcccatgggtttcaaaggtatttgtttcccttttctaTCAGAGTAGAGAATAAGGTCTTG…
 # >chr02B
-# aaaccctaaaccctaaaccctaaaccctaaacccTAAACCCTAAACCCTAAACCCTAAACCCTAAAC… 
+# gtatgcttagtgtccagatgccaatgccggcggcaaggagtcatgggagcatctggctgggagcctcgcggtggagatgtccggggt…
 ```
 We also have to prepare input files of genes (in bed format, for example: SA.bed and SB.bed) and chromosome length information (SA.len and SB.len), which can be obtained from the genome assembly and annotation of the haplotype (two subgenomes for a haplotype-resolved genome assembly of a diploid species) genomes.
 
@@ -181,12 +185,12 @@ Output files: SA.bed SB.bed. column are chromosome, start location, end location
 
 ```
 cat SA.bed
-# chr01A	16570	20155	PAxG01Ag0000100	0	-
-# chr01A	40601	47447	PAxG01Ag0000200	0	-
+# chr01A	1953	4056	Zo_SA_chr01A_1	0	+
+# chr01A	15432	24328	Zo_SA_chr01A_2	0	+
 
 cat SB.bed
-# chr01B	39112	40364	PAxG01Bg0000100	0	-
-# chr01B	47342	49123	PAxG01Bg0000200	0	+
+# chr01B	2565	8399	Zo_SB_chr01B_1	0	+
+# chr01B	9304	13618	Zo_SB_chr01B_2	0	-
 ```
 
 (2) prepare the file of chromosome length of two subgenomes A and B
@@ -203,24 +207,26 @@ cat SA.len
 # chr02A	24505410	2307
 
 cat SB.len
-# chr01B	51099886	4086
-# chr02B	27466271	2296
+# chr01B	171592823	4318
+# chr02B	156697907	3810
 ```
 Columns are chromosome, length of chromosome and number of chromosome genes.
 
 
 ```
 cat SA.gff
-# chr01A	PAxG01Ag0000100 16571	20155	-	1	PAxG01Ag0000100.1
-# chr01A	PAxG01Ag0000200 40602	47447	-	2	PAxG01Ag0000200.1
+# chr01A	Zo_SA_chr01A_1	1954	4056	+	1	Zo_SA_chr01A_1.1
+# chr01A	Zo_SA_chr01A_2	15433	24328	+	2	Zo_SA_chr01A_2.1
 
 cat SB.gff
-# chr01B	PAxG01Bg0000100	39113	40364	-	1	PAxG01Bg0000100.1
-# chr01B	PAxG01Bg0000200	47343	49123	+	2	PAxG01Bg0000200.1
+# chr01B	Zo_SB_chr01B_1	2566	8399	+	1	Zo_SB_chr01B_1.1
+# chr01B	Zo_SB_chr01B_2	9305	13618	-	2	Zo_SB_chr01B_2.1
 ```
 Each column is chromosome number, gene name, start location, end location, strand, order of each chromosome (starting from 1) and original id and not read.
 
 For more information, please refer to: https://wgdi.readthedocs.io/en/latest/usage.html 
+
+**Note:** To facilitate the subsequent process, we have renamed the gene IDs, with the correspondence between the original and updated gene IDs provided in the two files (rename_SA.genelist and rename_SB.genelist). 
 
 - **Output files**
 
