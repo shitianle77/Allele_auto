@@ -70,23 +70,14 @@ done
 pwd=`pwd`
 
 #######################################################
-#PartⅡ Allele-specific gene expression
+#PartⅡ Allele specific expression
 #######################################################
-echo -e "\n\t##########################################\n\t##   PartⅡ Allele-specific gene expression   ##\n\t##########################################\n" && sleep 2s
+echo -e "\n\t##########################################\n\t##   PartⅡ Allele specific expression   ##\n\t##########################################\n" && sleep 2s
 
 #######################################################
 #1、Data processing
 
 cd $pwd/00_data/RNA_seq
-
-#(1) allele pairs
-#$pwd/02_wgdi/allele_pairs_lasted.txt
-
-#(2) Count
-# Inputdata
-
-#(3) TPM
-# Inputdata
 
 ########################################################
 #2、Identification and classification of differentially expressed allele pairs
@@ -166,9 +157,9 @@ cd $pwd/03_DEG/1_Class_alleles/stats_number
 Rscript $pwd/bin/Classification_histogram.r ./ duidietu.txt ../name_list.txt
 
 #################################################
-# 3.2 Comparison on number of highly expressed genes from different homologous chromosomes
+# 3.2 The number of highly expressed alleles in each chromosome
 #################################################
-echo -e "\n\t# Comparison on number of highly expressed genes from different homologous chromosomes #\n" && sleep 2s
+echo -e "\n\t# The number of highly expressed alleles in each chromosome #\n" && sleep 2s
 
 #################################################
 #3.2.1 Data processing
@@ -178,12 +169,12 @@ cd High_expression
 
 for i in `cat ../name_list.txt`
 do
-cat ../${i}.diff0.sup.txt |awk 'NR>1{print $0}'|sed 's/_/\t/'|awk '{print $1}'|grep -f - ../../../00_data/${SA}.gff|cut -f 1|sort |uniq -c|awk '{print $1"\t"$2}'|sed 's/A/\tA/'|awk '{print $1"\t"$3"\t"$2}'
+cat ../${i}.diff0.sup.txt |awk 'NR>1{print $0}'|sed 's/-/\t/'|awk '{print $1}'|grep -f - ../../../00_data/${SA}.gff|cut -f 1|sort |uniq -c|awk '{print $1"\t"$2}'|sed 's/A/\tA/'|awk '{print $1"\t"$3"\t"$2}'
 done >> high_expression_A.txt
 
 for i in `cat ../name_list.txt`
 do
-cat ../${i}.diff0.dom.txt |awk 'NR>1{print $0}'|sed 's/_/\t/'|awk '{print $2}'|grep -f - ../../../00_data/${SB}.gff|cut -f 1|sort |uniq -c|awk '{print $1"\t"$2}'|sed 's/B/\tB/'|awk '{print $1"\t"$3"\t"$2}'
+cat ../${i}.diff0.dom.txt |awk 'NR>1{print $0}'|sed 's/-/\t/'|awk '{print $2}'|grep -f - ../../../00_data/${SB}.gff|cut -f 1|sort |uniq -c|awk '{print $1"\t"$2}'|sed 's/B/\tB/'|awk '{print $1"\t"$3"\t"$2}'
 done >> high_expression_B.txt
 
 cat high_expression_A.txt high_expression_B.txt|sed '1iNumber\tGroup\tChromosomes' > Highexpression_chr_number.txt
@@ -195,9 +186,9 @@ cd $pwd/03_DEG/1_Class_alleles/High_expression
 Rscript $pwd/bin/Highexpression_chr_number.r ./ Highexpression_chr_number.txt
 
 #################################################
-# 3.3 Boxplot visualizing the comparison on TPM values, Ka, Ks, and the Ka/Ks ratio for each allele pairs of the three differentially expressed categories (Diff0, Diff2, and Diff8)
+# 3.3 The distribution of alleles with different differential expression folds under each condition
 #################################################
-echo -e "\n\t# Boxplot visualizing the comparison on TPM values, Ka, Ks, and Ka/Ks ratio for each allele pairs of the three differentially expressed categories #\n" && sleep 2s
+echo -e "\n\t# The distribution of alleles with different differential expression folds under each condition #\n" && sleep 2s
 
 #################################################
 cd $pwd/03_DEG/
@@ -230,8 +221,8 @@ cd $pwd/03_DEG/2_Diff_comparison
 mkdir KaKs
 cd KaKs
 
-awk '{print $1"_"$2}' $pwd/02_wgdi/allele_pairs_lasted.txt > allelepairs_lasted.txt
-awk 'NR>1{print $1"_"$2"\t"$3"\t"$4}' $pwd/02_wgdi/SA_SB.ks.txt |awk '{if($3==0)print $1"\t"$2"\t"$3"\t"0; else print $1"\t"$2"\t"$3"\t"($2/$3)}' |grep -f allelepairs_lasted.txt - > kaks.txt
+awk '{print $1"-"$2}' $pwd/02_wgdi/allele_pairs_lasted.txt > allelepairs_lasted.txt
+awk 'NR>1{print $1"-"$2"\t"$3"\t"$4}' $pwd/02_wgdi/SA_SB.ks.txt |awk '{if($3==0)print $1"\t"$2"\t"$3"\t"0; else print $1"\t"$2"\t"$3"\t"($2/$3)}' |grep -f allelepairs_lasted.txt - > kaks.txt
 
 grep -f $pwd/03_DEG/2_Diff_comparison/TPM/diff0.name kaks.txt|awk -va="diff0" '{print $0"\t"a}' > diff0.kaks
 grep -f $pwd/03_DEG/2_Diff_comparison/TPM/diff2.name kaks.txt|awk -va="diff2" '{print $0"\t"a}' > diff2.kaks
@@ -244,4 +235,4 @@ rm kaks.txt diff0.kaks diff2.kaks diff8.kaks
 cd $pwd/03_DEG/2_Diff_comparison/KaKs
 Rscript $pwd/bin/kaks_boxplot.r ./ all.kaks
 
-rm $pwd/03_DEG/1_Class_alleles/a*
+#rm $pwd/03_DEG/1_Class_alleles/a*
