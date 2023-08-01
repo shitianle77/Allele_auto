@@ -97,4 +97,3 @@ write.table(all,paste("a", i, ".diff2.dom.txt", sep = ""), sep = "\t",quote = F,
 all = subset(AvsB,padj <= 0.05 & (log2FoldChange >= 3))
 write.table(all,paste("a", i, ".diff8.dom.txt", sep = ""), sep = "\t",quote = F,row.names = T,col.names = T)
 }
-
