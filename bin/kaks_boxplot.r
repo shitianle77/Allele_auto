@@ -25,7 +25,7 @@ colnames(data) <- c("Allelepair","Ka","Ks","Ka/Ks","Group")
 p1 <- ggplot(data, aes(x=Group,y=Ka,fill=Group)) + 
   geom_boxplot(outlier.colour="white", outlier.size  = 0)+
   theme(legend.position="none") +
-  coord_cartesian(ylim=c(0,0.22))+ ##The range of the Y-axis is adjusted according to your own data.
+  coord_cartesian(ylim=c(0,0.15))+
   theme_bw() +theme(panel.grid=element_blank())+
   theme(axis.title.x = element_text(face="plain", size=10),axis.text.x = element_text(vjust=1, size=10)) + theme(axis.title.y = element_text(face="plain", size=10),axis.text.y  = element_text(vjust=1, size=10)) +
   theme(legend.title = element_text(face = "plain",size=9),legend.text = element_text(face="plain",size = 9)) +
@@ -40,7 +40,7 @@ dev.off()
 p2 <- ggplot(data, aes(x=Group,y=Ks,fill=Group)) + 
   geom_boxplot(outlier.colour="white", outlier.size  = 0)+
   theme(legend.position="none") +
-  coord_cartesian(ylim=c(0,0.33))+ ##The range of the Y-axis is adjusted according to your own data.
+  coord_cartesian(ylim=c(0,0.22))+
   theme_bw() +theme(panel.grid=element_blank())+
   theme(axis.title.x = element_text(face="plain", size=10),axis.text.x = element_text(vjust=1, size=10)) + theme(axis.title.y = element_text(face="plain", size=10),axis.text.y  = element_text(vjust=1, size=10)) +
   theme(legend.title = element_text(face = "plain",size=9),legend.text = element_text(face="plain",size = 9)) +
@@ -55,7 +55,7 @@ dev.off()
 p3 <- ggplot(data, aes(x=Group,y=Ka/Ks,fill=Group)) + 
   geom_boxplot(outlier.colour="white", outlier.size  = 0)+
   theme(legend.position="none") +
-  coord_cartesian(ylim=c(0,1.85))+ ##The range of the Y-axis is adjusted according to your own data.
+  coord_cartesian(ylim=c(0,1.85))+
   theme_bw() +theme(panel.grid=element_blank())+
   theme(axis.title.x = element_text(face="plain", size=10),axis.text.x = element_text(vjust=1, size=10)) + theme(axis.title.y = element_text(face="plain", size=10),axis.text.y  = element_text(vjust=1, size=10)) +
   theme(legend.title = element_text(face = "plain",size=9),legend.text = element_text(face="plain",size = 9)) +
@@ -66,7 +66,7 @@ pdf("kaks.pdf", width = 2.5, height = 3)
 p3
 dev.off()
 
-##检验
+##Mann–Whitney–Wilcoxon test
 data = read.table(args[2],header=F,sep = "\t")
 head(data)
 SA <- data[data[,5]=="diff0",]
@@ -83,25 +83,3 @@ wilcox.test(SA$V3,SC$V3)
 wilcox.test(SA$V4,SB$V4)
 wilcox.test(SB$V4,SC$V4)
 wilcox.test(SA$V4,SC$V4)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
