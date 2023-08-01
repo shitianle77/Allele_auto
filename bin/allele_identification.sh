@@ -90,7 +90,7 @@ perl $pwd/bin/fasta_no_blank.pl $pwd/00_data/${SB}.pep|grep -A 1 ${i}B > chr${i}
 cd ..
 done
 
-#（3）homologous chromosome pairs
+#（3）chromosome group information
 for i in `cat $pwd/00_data/$chrpairs|cut -f 3`
 do
 cd ${i}
@@ -123,7 +123,7 @@ cat ./*/*.RBH > raw_RBH.genepairs
 cat ./*/*.RBH |awk '{print $1"\t"$2}' > RBH.genepairs
 
 ########################################################
-#3、Filtering
+#3、Filteri
 ## WGDI-dependent
 ########################################################
 echo -e "\n\t##                              2. Filtering                              ##\n" && sleep 2s
@@ -143,11 +143,11 @@ do
 ln -s ../${i}/output/${i}A_${i}B.blast2 ./
 ln -s ../${i}/output/${i}B_${i}A.blast2 ./
 ln -s ../${i}/${i}A_${i}B.RBH ./
-awk '{print $2"\t"$1}' ${i}B_${i}A.blast2 |cat - ${i}A_${i}B.blast2|awk '{print $1"\t"$2}'|sort|uniq -c|awk '{if($1==2)print $2"\t"$3}'|grep -f - ../RBH.genepairs > ${i}_RBH_2hits.genepairs2 
-grep -f ${i}_RBH_2hits.genepairs2 ${i}A_${i}B.blast2 > ${i}_RBH_2hits.blast2
-awk '{print $1"\t"$2}' ${i}A_${i}B.RBH|cat - ${i}_RBH_2hits.genepairs2|sort|uniq -c|awk '{if($1==1)print $2"\t"$3}'|grep -f - ${i}A_${i}B.blast2 > ${i}_RBH_1hits_A2B.blast2
-awk '{print $1"\t"$2}' ${i}A_${i}B.RBH|cat - ${i}_RBH_2hits.genepairs2|sort|uniq -c|awk '{if($1==1)print $2"\t"$3}'|grep -f - ${i}A_${i}B.blast2|awk '{print $1"\t"$2}' > ${i}_RBH_1hits_A2B.genepairs2
-awk '{print $1"\t"$2}' ${i}A_${i}B.RBH|cat - ${i}_RBH_2hits.genepairs2 ${i}_RBH_1hits_A2B.genepairs2|sort|uniq -c|awk '{if($1==1)print $3"\t"$2}'|grep -f - ${i}B_${i}A.blast2|awk '{print $2"\t"$1"\t"$3"\t"$4"\t"$5"\t"$6"\t"$7"\t"$8"\t"$9"\t"$10"\t"$11"\t"$12}'|cat ${i}_RBH_2hits.blast2 ${i}_RBH_1hits_A2B.blast2 - > ${i}_RBH.blast1
+awk '{print $2"\t"$1}' ${i}B_${i}A.blast2 |cat - ${i}A_${i}B.blast2|awk '{print $1"\t"$2}'|sort|uniq -c|awk '{if($1==2)print $2"\t"$3}'|grep -w -f - ../RBH.genepairs > ${i}_RBH_2hits.genepairs2 
+grep -w -f ${i}_RBH_2hits.genepairs2 ${i}A_${i}B.blast2 > ${i}_RBH_2hits.blast2
+awk '{print $1"\t"$2}' ${i}A_${i}B.RBH|cat - ${i}_RBH_2hits.genepairs2|sort|uniq -c|awk '{if($1==1)print $2"\t"$3}'|grep -w -f - ${i}A_${i}B.blast2 > ${i}_RBH_1hits_A2B.blast2
+awk '{print $1"\t"$2}' ${i}A_${i}B.RBH|cat - ${i}_RBH_2hits.genepairs2|sort|uniq -c|awk '{if($1==1)print $2"\t"$3}'|grep -w -f - ${i}A_${i}B.blast2|awk '{print $1"\t"$2}' > ${i}_RBH_1hits_A2B.genepairs2
+awk '{print $1"\t"$2}' ${i}A_${i}B.RBH|cat - ${i}_RBH_2hits.genepairs2 ${i}_RBH_1hits_A2B.genepairs2|sort|uniq -c|awk '{if($1==1)print $3"\t"$2}'|grep -w -f - ${i}B_${i}A.blast2|awk '{print $2"\t"$1"\t"$3"\t"$4"\t"$5"\t"$6"\t"$7"\t"$8"\t"$9"\t"$10"\t"$11"\t"$12}'|cat ${i}_RBH_2hits.blast2 ${i}_RBH_1hits_A2B.blast2 - > ${i}_RBH.blast1
 rm *.RBH *.blast2 *.genepairs2
 done
 
@@ -177,14 +177,14 @@ cd 02_wgdi
 ln -s $pwd/01_genetribe/SA_SB.blast ./
 
 awk '{print $1"\t"$2}' SA_SB.blast |sed 's/\t/\n/' > SA_SB.genelist
-grep -f SA_SB.genelist $pwd/00_data/${SA}.gff > SA.gff
-grep -f SA_SB.genelist $pwd/00_data/${SB}.gff > SB.gff
+grep -w -f SA_SB.genelist $pwd/00_data/${SA}.gff > SA.gff
+grep -w -f SA_SB.genelist $pwd/00_data/${SB}.gff > SB.gff
 
 ## pep and cds sequences
-cat $pwd/00_data/${SA}.cds| sed 'N; s/\n/ /'|grep -f SA_SB.genelist - |sed 's/ /\n/' > SA.cds.fa
-cat $pwd/00_data/${SB}.cds| sed 'N; s/\n/ /'|grep -f SA_SB.genelist - |sed 's/ /\n/' > SB.cds.fa
-cat $pwd/00_data/${SA}.pep| sed 'N; s/\n/ /'|grep -f SA_SB.genelist - |sed 's/ /\n/' > SA.pep.fa
-cat $pwd/00_data/${SB}.pep| sed 'N; s/\n/ /'|grep -f SA_SB.genelist - |sed 's/ /\n/' > SB.pep.fa
+cat $pwd/00_data/${SA}.cds| sed 'N; s/\n/ /'|grep -w -f SA_SB.genelist - |sed 's/ /\n/' > SA.cds.fa
+cat $pwd/00_data/${SB}.cds| sed 'N; s/\n/ /'|grep -w -f SA_SB.genelist - |sed 's/ /\n/' > SB.cds.fa
+cat $pwd/00_data/${SA}.pep| sed 'N; s/\n/ /'|grep -w -f SA_SB.genelist - |sed 's/ /\n/' > SA.pep.fa
+cat $pwd/00_data/${SB}.pep| sed 'N; s/\n/ /'|grep -w -f SA_SB.genelist - |sed 's/ /\n/' > SB.pep.fa
 
 cat SA.cds.fa SB.cds.fa > SA_SB.cds.fa
 cat SA.pep.fa SB.pep.fa > SA_SB.pep.fa
@@ -218,7 +218,7 @@ cd $pwd/02_wgdi
 
 #data processing
 cat SA_SB_block.csv|sed 's/,/\t/g' > block.tsv
-awk 'NR==FNR{a[$1]=$0;next}NR>FNR{if($2 in a)print a[$2]"\t"$0}' SA_SB.ks.txt SA.gff |awk '{print $2"\t"$1"\t"$7"\t"$9"\t"$10"\t"$3"\t"$4"\t"$5"\t"$6}' > aa
+awk '{print NF"\t"$0}' SA_SB.ks.txt|awk '{if($1=="2")print $0"\t"0"\t"0"\t"0"\t"0; else print $0}'|cut -f 2-|awk 'NR==FNR{a[$1]=$0;next}NR>FNR{if($2 in a)print a[$2]"\t"$0}' - SA.gff |awk '{print $2"\t"$1"\t"$7"\t"$9"\t"$10"\t"$3"\t"$4"\t"$5"\t"$6}' > aa
 awk 'NR==FNR{a[$1]=$0;next}NR>FNR{if($2 in a)print a[$2]"\t"$0}' aa SB.gff |awk '{print $2"\t"$3"\t"$4"\t"$5"\t"$1"\t"$10"\t"$12"\t"$13"\t"$6"\t"$7"\t"$8"\t"$9}' |sed '1igeneID1\tchr1\tstart_pos1\tend_pos1\tgeneID2\tchr2\tstart_pos2\tend_pos2\tka_NG86\tks_NG86\tka_YN00\tks_YN00' > raw_genepairs_info.tsv
 awk '{if($0~/.*#/){split($0,a,"Alignment");print a[1]}else{print $0"\t"a[2]}}'  SA_SB.collinearity.txt |sed '/#/d' |sed 's/ /\t/g'|awk '{print $6"\t"$1"\t"$2"\t"$3"\t"$4"\t"$5}'|sed 's/://' > collinearity.txt
 awk 'NR==FNR{a[$1]=$0;next}NR>FNR{if($2 in a)print a[$2]"\t"$0}' raw_genepairs_info.tsv collinearity.txt |awk '{print $13"\t"$1"\t"$2"\t"$3"\t"$4"\t"$5"\t"$6"\t"$7"\t"$8"\t"$9"\t"$10"\t"$11"\t"$12}'|sed '1iBlock\tgeneID1\tchr1\tstart_pos1\tend_pos1\tgeneID2\tchr2\tstart_pos2\tend_pos2\tka_NG86\tks_NG86\tka_YN00\tks_YN00' > genepairs_info.tsv
@@ -237,11 +237,11 @@ cat ${blockfile}|awk -vm=${mean} -vs=${sd} -F"\t" '{OFS="\t"}NR>1{plus=m+3*s;min
 
 #3.3.2 Removal of physically located outlier homologous gene pairs
 ##Calculate the mean and standard deviation(sd) from the data distribution of pair
-MEAN=`cat ${pairfile}|awk -F "\t" 'NR>1{x=$5-$4+1;y=$9-$8+1;print y/x}'|grep -v "NA"|awk '{x[NR]=$0; s+=$0; n++} END{a=s/n; print a}' `
-SD=`cat ${pairfile}|awk -F "\t" 'NR>1{x=$5-$4+1;y=$9-$8+1;print y/x}'|grep -v "NA"|awk '{x[NR]=$0; s+=$0; n++} END{a=s/n; for (i in x){ss += (x[i]-a)^2} sd = sqrt(ss/n); print sd}' `
+MEAN=`cat ${pairfile}|awk -F "\t" 'NR>1{x=($5-$4)/2+$4;y=($9-$8)/2+$8;print y/x}'|grep -v "NA"|awk '{x[NR]=$0; s+=$0; n++} END{a=s/n; print a}' `
+SD=`cat ${pairfile}|awk -F "\t" 'NR>1{x=($5-$4)/2+$4;y=($9-$8)/2+$8;print y/x}'|grep -v "NA"|awk '{x[NR]=$0; s+=$0; n++} END{a=s/n; for (i in x){ss += (x[i]-a)^2} sd = sqrt(ss/n); print sd}' `
 
 ##Filtering blocks using mean and sd
-cat ${blockfile}|awk -vm=${MEAN} -vs=${SD} -F"\t" '{OFS="\t"}NR>1{x=$5-$4+1;y=$7-$6+1;slope=y/x;plus=m+3*s;minus=m-3*s;if(slope>minus && slope<plus) print $1}' > keep.positionblock.id
+cat ${blockfile}|awk -vm=${MEAN} -vs=${SD} -F"\t" '{OFS="\t"}NR>1{x=($5-$4)/2+$4;y=($7-$6)/2+$6;slope=y/x;plus=m+3*s;minus=m-3*s;if(slope>minus && slope<plus) print $1}' > keep.positionblock.id
 
 #######################################################
 #3.4 Obtain filtered Co-linear block and allele pair files
@@ -254,3 +254,20 @@ rm keep.ksblock.id keep.positionblock.id
 #######################################################
 cat filtered.genepairs_info.tsv|awk 'NR>1{print $2"\t"$6}' > allele_pairs_lasted.txt
 
+
+#######################################################
+#5、Collinearity of a pair of alleles on two subgenomes
+#######################################################
+mkdir allele_plot && cd allele_plot
+# run
+for i in `cat $pwd/00_data/$chrpairs|cut -f 3`
+do
+awk 'NR==FNR{a[$4]=$0;}NR!=FNR{print $0,a[$1]}' $pwd/01_genetribe/${i}/${i}A.bed $pwd/02_wgdi/allele_pairs_lasted.txt|awk '{if(NF=="8")print $0}' > ${i}.aa
+awk 'NR==FNR{a[$4]=$0;}NR!=FNR{print $0,a[$2]}' $pwd/01_genetribe/${i}/${i}B.bed ${i}.aa|awk -va=${i} '{print a"\t"$4"\t"$5"\t"$10"\t"$11}' > ${i}.coord.allele
+done
+
+rm *.aa
+cat *.coord.allele > pairs.coord.allele
+
+#plot
+Rscript $pwd/bin/plot_pairs_allele.r ./ pairs.coord.allele
