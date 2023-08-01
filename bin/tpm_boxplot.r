@@ -24,7 +24,7 @@ colnames(data) <- c("TPM","Group")
 p <- ggplot(data, aes(x=Group,y=TPM,fill=Group)) + 
   geom_boxplot(outlier.colour="white", outlier.size  = 0)+
   theme(legend.position="none") +
-  coord_cartesian(ylim=c(0,45))+ ##The range of the Y-axis is adjusted according to your own data.
+  coord_cartesian(ylim=c(0,100))+ ##The range of the Y-axis is adjusted according to your own data.
   theme_bw() +theme(panel.grid=element_blank())+
   theme(axis.title.x = element_text(face="plain", size=10),axis.text.x = element_text(vjust=1, size=10)) + theme(axis.title.y = element_text(face="plain", size=10),axis.text.y  = element_text(vjust=1, size=10)) +
   theme(legend.title = element_text(face = "plain",size=9),legend.text = element_text(face="plain",size = 9)) +
@@ -47,4 +47,3 @@ data3 <- data[data[,2]=="diff8",]
 wilcox.test(data1$V1,data2$V1)
 wilcox.test(data2$V1,data3$V1)
 wilcox.test(data1$V1,data3$V1)
-
