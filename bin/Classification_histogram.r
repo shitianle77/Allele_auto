@@ -1,7 +1,7 @@
 #Rscript
 # Usage: Rscript myscript.R
 ##################################################################################################################
-# Grouping of allele-specific gene (ASE) expression profile probably among samples from different tissues and treatments
+#Proportion of alleles with different differential expression fold
 ##################################################################################################################
 
 args<-commandArgs(TRUE)
@@ -37,4 +37,3 @@ p <- ggplot(data,aes(Treatment,Percentage,fill=Group))+
 pdf("duidietu.pdf",width = 5, height = 8)
 p
 dev.off()
-
