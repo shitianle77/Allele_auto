@@ -1,7 +1,7 @@
 #!Rscript
 # Usage: Rscript myscript.R
 ##################################################################################################################
-# Comparison on number of highly expressed genes from different homologous chromosomes
+#Statistics on the number of differential allele pairs highly expressed in each chromosome under different tissues and treatments
 ##################################################################################################################
 
 args<-commandArgs(TRUE)
@@ -46,5 +46,3 @@ p <- ggplot(data, aes(x=Chromosomes, y=Number, fill=Group))+
 pdf("Highexpression_chr.pdf",width = 8, height = 6)
 p
 dev.off()
-
-
