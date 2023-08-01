@@ -40,42 +40,6 @@ write.table(AvsB_up,file="AvsB.up.txt",sep = "\t",quote = F,row.names = T,col.na
 AvsB_down = subset(AvsB,padj <= 0.05 & (log2FoldChange < 0))
 write.table(AvsB_down,file="AvsB.down.txt",sep = "\t",quote = F,row.names = T,col.names = T)
 
-#-------------------
-#00-all
-#AvsB <- as.data.frame(AvsB[order(AvsB$padj),])
-#all = subset(AvsB,padj > 0.05)
-#write.table(all,file="diff00.txt",sep = "\t",quote = F,row.names = T,col.names = T)
-#-------------------
-#0-all
-#all = subset(AvsB,padj <= 0.05 & (-1 <= log2FoldChange & log2FoldChange <= 1))
-#write.table(all,file="diff0.txt",sep = "\t",quote = F,row.names = T,col.names = T)
-##0-up
-#all = subset(AvsB,padj <= 0.05 & ((log2FoldChange > 0 & log2FoldChange <= 1)))
-#write.table(all,file="diff0.up.txt",sep = "\t",quote = F,row.names = T,col.names = T)
-##0-down
-#all = subset(AvsB,padj <= 0.05 & ((-1 <= log2FoldChange & log2FoldChange < 0)))
-#write.table(all,file="diff0.down.txt",sep = "\t",quote = F,row.names = T,col.names = T)
-#------------------
-#2-all
-#all = subset(AvsB,padj <= 0.05 & ((3 > log2FoldChange & log2FoldChange > 1) | (-3 < log2FoldChange & log2FoldChange < -1)))
-#write.table(all,file="diff2.txt",sep = "\t",quote = F,row.names = T,col.names = T)
-##2-up
-#all = subset(AvsB,padj <= 0.05 & ((3 > log2FoldChange & log2FoldChange > 1)))
-#write.table(all,file="diff2.up.txt",sep = "\t",quote = F,row.names = T,col.names = T)
-##2-down
-#all = subset(AvsB,padj <= 0.05 & ((-3 < log2FoldChange & log2FoldChange < -1)))
-#write.table(all,file="diff2.down.txt",sep = "\t",quote = F,row.names = T,col.names = T)
-#-------------------
-#8-all
-#all = subset(AvsB,padj <= 0.05 & (log2FoldChange >= 3 | log2FoldChange <= -3))
-#write.table(all,file="diff8.txt",sep = "\t",quote = F,row.names = T,col.names = T)
-##8-up
-#all = subset(AvsB,padj <= 0.05 & (log2FoldChange >= 3))
-#write.table(all,file="diff8.up.txt",sep = "\t",quote = F,row.names = T,col.names = T)
-##8-down
-#all = subset(AvsB,padj <= 0.05 & (log2FoldChange <= -3))
-#write.table(all,file="diff8.down.txt",sep = "\t",quote = F,row.names = T,col.names = T)
-
 #################################################
 #DEseq2
 ##Each treatments
