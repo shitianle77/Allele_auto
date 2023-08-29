@@ -1,0 +1,2 @@
+cd chr02; genetribe core -l chr02A -f chr02B
+cd chr01; genetribe core -l chr01A -f chr01B
