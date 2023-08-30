@@ -1,2 +1,0 @@
-chr01A	chr01B	chr01
-chr02A	chr02B	chr02
