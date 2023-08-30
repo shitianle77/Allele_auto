@@ -18,22 +18,19 @@
 
 **[ pipeline ]**
 
-  allele_identification for allele identification
-  
+  allele_identification for allele identification 
   allele_specific_expression for allele-specific expression analysis
 
 **For details on usage, please initiate the following commands:**
 
   ```
   bash allele_identification.sh -h
-  
   bash allele_specific_expression.sh -h
 ```
 
 **[ Rule for allele-pair identification ]**
 
 (1) 3σ rule is used for allele-pair identification, please refer to its original publication for details [(Lehmann, 2013)](https://ascelibrary.org/doi/abs/10.1061/(ASCE)SU.1943-5428.0000112). 
-
 (2) Tukey’s method is an acclaimed and straightforward graphical technique known forrepresenting continuous univariate data through a boxplot. This method calculates the upper and lower extremes of the data through the quartile.
   
 ## 2 Installation
@@ -99,7 +96,7 @@ Before the official start, users need to modify them:
 # bash ./bin/allele_identification.sh ‐p Zo_chrpairs.txt ‐a Zo_SA ‐b Zo_SB
 # bash ./bin/allele_specific_expression.sh ‐a Zo_SA ‐b Zo_SB ‐c allelepairs.count_selected.txt ‐t allelepairs.tpm_selected.txt ‐s 21
 ```
-Note: After obtaining the RBH gene pair (after running bash allele_identification.sh -p Zo_chrpairs.txt -a
+**Note:** After obtaining the RBH gene pair (after running bash allele_identification.sh -p Zo_chrpairs.txt -a
 Zo_SA -b Zo_SB), we also provided another way to filter alleles through a single line of code: bash
 ./bin/allele_filtering.sh - p Zo_chrpairs.txt - a Zo_SA- b Zo_SB.
 
