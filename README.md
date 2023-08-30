@@ -19,6 +19,7 @@
 **[ pipeline ]**
 
   allele_identification for allele identification 
+  
   allele_specific_expression for allele-specific expression analysis
 
 **For details on usage, please initiate the following commands:**
@@ -31,6 +32,7 @@
 **[ Rule for allele-pair identification ]**
 
 (1) 3σ rule is used for allele-pair identification, please refer to its original publication for details [(Lehmann, 2013)](https://ascelibrary.org/doi/abs/10.1061/(ASCE)SU.1943-5428.0000112). 
+
 (2) Tukey’s method is an acclaimed and straightforward graphical technique known forrepresenting continuous univariate data through a boxplot. This method calculates the upper and lower extremes of the data through the quartile.
   
 ## 2 Installation
@@ -108,38 +110,38 @@ Here we have described in details on formats of the input files and the output f
 
 - **Input files**
 
-(1) One such input file is of the homologous chromosome grouping.
+(1) One such input file is of the homologous chromosome grouping
 
 **Get an example of such input by executing this command:**
 
 ```
-cat chrpairs.txt
-# chr01A	chr01B	chr01
-# chr02A	chr02B	chr02
+# cat Zo_chrpairs.txt
+chr01A	chr01B	chr01
+chr02A	chr02B	chr02
 ```
 
-(2) Other input files include those of protein sequences (for example: SA.pep, SB.pep), cds sequences (SA.cds, SB.cds), fasta sequences (SA.fa, SB.fa) and gff files (SA.gff3, SB.gff3) from gene annotation and genome assembly of both the two haplotype (two subgenomes for a haplotype-resolved genome assembly of a diploid species) genomes.
+(2) Other input files include those of protein sequences (for example: Zo_SA.pep, Zo_SB.pep), cds sequences (Zo_SA.cds, Zo_SB.cds), fasta sequences (Zo_SA.fa, Zo_SB.fa) and gff files (Zo_SA.gff3, Zo_SB.gff3) from gene annotation and genome assembly of both the two haplotype (two subgenomes for a haplotype-resolved genome assembly of a diploid species) genomes.
 
 **Get examples of such input by executing the following commands:**
 
 ```
-cat SA.pep
-# >Zo_SA_chr01A_1
-# MNNASPSAAEPNSHALALPNPSSPLKDRSTYTNLKEHLLRPAGNNLWSPPVSKRATAGSK
+# cat Zo_SA.pep
+>Zo_SA_chr01A_1
+MNNASPSAAEPNSHALALPNPSSPLKDRSTYTNLKEHLLRPAGNNLWSPPVSKRATAGSK
 
-cat SB.pep
-# >Zo_SB_chr01B_1
-# MITTRFFPHSRFFLPSHLPTLCRPIHSGAAHPRITRSELVDRICRILTLERFHAIPKLPFRFSDD
+# cat Zo_SB.pep
+>Zo_SB_chr01B_1
+MITTRFFPHSRFFLPSHLPTLCRPIHSGAAHPRITRSELVDRICRILTLERFHAIPKLPFRFSDD
 
-cat SA.cds
-# >Zo_SA_chr01A_1
-# ATGAATAATGCAAGTCCATCTGCTGCAGAACCCAACTCACACGCACTTGCTCTTCCTAATCCTTCTTCCCCACTTAAAGACCGTTCTACATATACTAACTTAAAAGAACATCTCTTGAGACCAGCAGGGAACAATCTCTGGTCGCCACCAGTCAGCAAGCGAGCGACAGCCGGGAG
+# cat Zo_SA.cds
+>Zo_SA_chr01A_1
+ATGAATAATGCAAGTCCATCTGCTGCAGAACCCAACTCACACGCACTTGCTCTTCCTAATCCTTCTTCCCCACTTAAAGACCGTTCTACATATACTAACTTAAAAGAACATCTCTTGAGACCAGCAGGGAACAATCTCTGGTCGCCACCAGTCAGCAAGCGAGCGACAGCCGGGAG
 
-cat SB.cds
-# >Zo_SB_chr01B_1
-# TGATCACAACTAGATTCTTCCCTCATTCGCGTTTCTTCCTCCCCTCGCACCTGCCCACTCTCTGCCGGCCCATCCACTCCGGCGCTGCCCACCCCCGCATCACCAGATCTGAGCTCGTCGACCGGATATGCCGCATCCTCACCCTCGAGCGCTTCCACGCCATTCCCAAGCTTCCC
+# cat Zo_SB.cds
+>Zo_SB_chr01B_1
+TGATCACAACTAGATTCTTCCCTCATTCGCGTTTCTTCCTCCCCTCGCACCTGCCCACTCTCTGCCGGCCCATCCACTCCGGCGCTGCCCACCCCCGCATCACCAGATCTGAGCTCGTCGACCGGATATGCCGCATCCTCACCCTCGAGCGCTTCCACGCCATTCCCAAGCTTCCC
 
-cat SA.gff3
+cat Zo_SA.gff3
 # chr01A	maker	gene	1954	4056	.	+	.	ID=Zioff01G0000100;Name=Zioff01G0000100
 # chr01A	maker	mRNA	1954	4056	.	+	.	ID=Zioff01G0000100.1;Parent=Zioff01G0000100;Name=Zioff01G0000100.1;
 # chr01A	maker	exon	1954	2105	.	+	.	ID=Zioff01G0000100.1:exon:1170;Parent=Zioff01G0000100.1
@@ -147,7 +149,7 @@ cat SA.gff3
 # chr01A	maker	CDS	1954	2105	.	+	0	ID=Zioff01G0000100.1:cds;Parent=Zioff01G0000100.1
 # chr01A	maker	CDS	3204	4056	.	+	1	ID=Zioff01G0000100.1:cds;Parent=Zioff01G0000100.1
 
-cat SB.gff3
+cat Zo_SB.gff3
 # chr01B	maker	gene	2566	8399	.	+	.	ID=Zioff01G0466400;Name=Zioff01G0466400
 # chr01B	maker	mRNA	2566	8399	.	+	.	ID=Zioff01G0466400.1;Parent=Zioff01G0466400;Name=Zioff01G0466400.1
 # chr01B	maker	exon	2566	2954	.	+	.	ID=Zioff01G0466400.1:exon:1;Parent=Zioff01G0466400.1
@@ -159,38 +161,38 @@ cat SB.gff3
 # chr01B	maker	CDS	7760	7949	.	+	1	ID=Zioff01G0466400.1:cds;Parent=Zioff01G0466400.1
 # chr01B	maker	exon	7760	8399	.	+	.	ID=Zioff01G0466400.1:exon:4;Parent=Zioff01G0466400.1
 
-cat SA.fa
+cat Zo_SA.fa
 # >chr01A
 # taGCAAGTTGTTTTACCTAATTTATTTTAATGTTAAATATTTAGTATTTGTTGATAAAAA…
 # >chr02A
 # caccggcggccggaggagttggggcggattgcaggactttggacccagCGCCGGCGCCTCCTTCGCATGGGA…
 
-cat SB.fa
+cat Zo_SB.fa
 # >chr01B
 # ccaaatagttgatactacttgcccatgggtttcaaaggtatttgtttcccttttctaTCAGAGTAGAGAATAAGGTCTTG…
 # >chr02B
 # gtatgcttagtgtccagatgccaatgccggcggcaaggagtcatgggagcatctggctgggagcctcgcggtggagatgtccggggt…
 ```
-We also have to prepare input files of genes (in bed format, for example: SA.bed and SB.bed) and chromosome length information (SA.len and SB.len), which can be obtained from the genome assembly and annotation of the haplotype (two subgenomes for a haplotype-resolved genome assembly of a diploid species) genomes.
+We also have to prepare input files of genes (in bed format, for example: Zo_SA.bed and Zo_SB.bed) and chromosome length information (Zo_SA.len and Zo_SB.len), which can be obtained from the genome assembly and annotation of the haplotype (two subgenomes for a haplotype-resolved genome assembly of a diploid species) genomes.
 
 (1) prepare bed file from gff file of subgenomes A and B (This is done by using the JCVI)
 
 ```
-python -m jcvi.formats.gff bed --type=gene --key=ID SA.gff3 -o SA.bed
-python -m jcvi.formats.gff bed --type=gene --key=ID SB.gff3 -o SB.bed
+# python -m jcvi.formats.gff bed --type=gene --key=ID Zo_SA.gff3 -o Zo_SA.bed
+# python -m jcvi.formats.gff bed --type=gene --key=ID Zo_SB.gff3 -o Zo_SB.bed
 ```
-Output files: SA.bed SB.bed. column are chromosome, start location, end location, gene ID, score, and strand.
+Output files: Zo_SA.bed and Zo_SB.bed. Columns are chromosome, start location, end location, gene ID, score, and strand.
 
 **Note:** For some annotations, the fourth column of bed contains some strings, such as gene:, ID:, etc., which we should delete.
 
 **Get an example of such input by executing the following commands:**
 
 ```
-cat SA.bed
+cat Zo_SA.bed
 # chr01A	1953	4056	Zo_SA_chr01A_1	0	+
 # chr01A	15432	24328	Zo_SA_chr01A_2	0	+
 
-cat SB.bed
+cat Zo_SB.bed
 # chr01B	2565	8399	Zo_SB_chr01B_1	0	+
 # chr01B	9304	13618	Zo_SB_chr01B_2	0	-
 ```
@@ -198,17 +200,17 @@ cat SB.bed
 (2) prepare the file of chromosome length of two subgenomes A and B
 
 ```
-python generate_conf.py -p SA SA.fa SA.gff3
-python generate_conf.py -p SB SB.fa SB.gff3
+python generate_conf.py -p Zo_SA Zo_SA.fa Zo_SA.gff3
+python generate_conf.py -p Zo_SB Zo_SB.fa Zo_SB.gff3
 ```
-Output files: SA.len SB.len SA.gff SB.gff (The gff files are used for subsequent filtering.)
+Output files: Zo_SA.len Zo_SB.len Zo_SA.gff Zo_SB.gff (The gff files are used for subsequent filtering.)
 
 ```
-cat SA.len
+cat Zo_SA.len
 # chr01A	50794782	4038
 # chr02A	24505410	2307
 
-cat SB.len
+cat Zo_SB.len
 # chr01B	171592823	4318
 # chr02B	156697907	3810
 ```
@@ -216,17 +218,17 @@ Columns are chromosome, length of chromosome and number of chromosome genes.
 
 
 ```
-cat SA.gff
+cat Zo_SA.gff
 # chr01A	Zo_SA_chr01A_1	1954	4056	+	1	Zo_SA_chr01A_1.1
 # chr01A	Zo_SA_chr01A_2	15433	24328	+	2	Zo_SA_chr01A_2.1
 
-cat SB.gff
+cat Zo_SB.gff
 # chr01B	Zo_SB_chr01B_1	2566	8399	+	1	Zo_SB_chr01B_1.1
 # chr01B	Zo_SB_chr01B_2	9305	13618	-	2	Zo_SB_chr01B_2.1
 ```
-Each column is chromosome number, gene name, start location, end location, strand, order of each chromosome (starting from 1) and original id and not read.
+##Each column is chromosome number, gene name, start location, end location, strand, order of each chromosome (starting from 1) and original id and not read.
 
-For more information, please refer to: https://wgdi.readthedocs.io/en/latest/usage.html 
+##For more information, please refer to: https://wgdi.readthedocs.io/en/latest/usage.html 
 
 **Note:** To facilitate the subsequent process, we have renamed the gene IDs, with the correspondence between the original and updated gene IDs provided in the two files (rename_SA.genelist and rename_SB.genelist). 
 
@@ -259,6 +261,28 @@ cd 02_wgdi
 |genepairs_info.tsv|Details of allele pairs on blocks (Position and Ks information)|
 |filtered.genepairs_info.tsv|Details of filtered allele pairs on blocks (Position and Ks information)|
 |allele_pairs_lasted.txt|The final allele pairs identified|
+
+```
+cd 02_wgdi-Tukey
+```
+|Output files|Description|
+|---|---|
+|allele_pairs_lasted.txt|The final allele pairs identified|
+|block.tsv|BlockInfo (Same as SA_SB_block.csv, separated by tab)|
+|genepairs_info.tsv|Details of allele pairs on blocks (Position and Ks information)|
+|filtered_ks_NG86-1.5.genepairs_info.tsv|Details of filtered allele pairs after removing Ks outliers (Position and Ks information)|
+|filtered_slope-1.5.genepairs_info.tsv|Details of filtered allele pairs after removing slope outliers (Position and Ks information)|
+|filtered.ks-slopebioplot_genepairs_info.tsv|Details of filtered allele pairs after removing Ks and slope outliers (Position and Ks information)|
+
+```
+cd 02_wgdi-Tukey/allele_plot
+```
+|Output files|Description|
+|---|---|
+|chr01.coord.allele|Details of the position information of the filtered allele pairs on chromosome 1|
+|chr02.coord.allele|Details of the position information of the filtered allele pairs on chromosome 2|
+|pairs.coord.allele|Details of the position information of the filtered allele pairs|
+|pairs.allele.pdf|Dotplot plot of filtered allele pairs|
 
 ### 4.2 Files for computation of allele-specific expression
 
