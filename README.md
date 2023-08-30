@@ -306,13 +306,13 @@ SB_s2_3: The third repeat (3) of the allele of subgenome B (SB) in sample2 (s2).
 **Here is one example (The count values of allele pairs in the three replicates of the first sample.):**
 
 ```
-cd ./00_data/RNA_seq
-cat allelepairs.count_selected.txt
-# Zo_SA_chr01A_1-Zo_SB_chr01B_47	0	0	0	0	0	0
-# Zo_SA_chr01A_2-Zo_SB_chr01B_48	828	907	757	354	384	406
-# Zo_SA_chr01A_3-Zo_SB_chr01B_49	0	0	0	0	0	0
-# Zo_SA_chr01A_4-Zo_SB_chr01B_50	2619	2758	2141	3305	4140	3122
-# Zo_SA_chr01A_5-Zo_SB_chr01B_51	15	21	10	0	0	0
+# cd ./00_data/RNA_seq
+# cat allelepairs.count_selected.txt
+Zo_SA_chr01A_1-Zo_SB_chr01B_47	0	0	0	0	0	0
+Zo_SA_chr01A_2-Zo_SB_chr01B_48	828	907	757	354	384	406
+Zo_SA_chr01A_3-Zo_SB_chr01B_49	0	0	0	0	0	0
+Zo_SA_chr01A_4-Zo_SB_chr01B_50	2619	2758	2141	3305	4140	3122
+Zo_SA_chr01A_5-Zo_SB_chr01B_51	15	21	10	0	0	0
 ```
 
 - **Output files**
@@ -363,9 +363,9 @@ bed: https://en.wikipedia.org/wiki/BED_(file_format)
 ## 5 Parameter setting
 
 ### 5.1 Parameter setting in the allele identification step
-
+**5.1.1 This could be executed by initiatinga single-line command. One exemplar command is:**
 ```
-bash ./bin/allele_identification.sh -p chrpairs.txt -a SA -b SB
+# bash ./bin/allele_identification.sh -p chrpairs.txt -a SA -b SB
 ```
 
 |Parameter|Description|
@@ -375,14 +375,24 @@ bash ./bin/allele_identification.sh -p chrpairs.txt -a SA -b SB
 |-b|Necessary parameter. name of subgenome B.|
 |-h|Print brief help message|
 
-**Note:** The names of the subgenomes and the prefixes of the input files must be the same. (eg: If -a is SA, the input file will be SA.pep; if -a is SubgenomeA, the input file will be SubgenomeA.pep.)
+**Note:** The names of the subgenomes and the prefixes of the input files must be the same.(eg: If -a is SA, the
+input file will be SA.pep; if -a is SubgenomeA, the input file will be SubgenomeA.pep.) The parameter setting
+requirements in 5.2 are the same.
 
-The parameter setting requirements in 5.2 are the same.
-
-### 5.2 Parameter setting in the allele specific expression step
-
+**5.1.2 This could be executed by initiating a single-line command. One exemplar command is:**
 ```
-bash ./bin/allele_specific_expression.sh -a SA -b SB -c allelepairs.count_selected.txt -t allelepairs.tpm_selected.txt -s 102
+# bash ./bin/ allele_fiiltering.sh ‐p chrpairs.txt ‐i 1.5
+```
+
+|Parameter|Description|
+|---|---|
+|-p|Necessary parameter. the target chromosome list.|
+|-i|Necessary parameter. the number of Inter Quartile Range (IQR).|
+
+### 5.2 Parameter setting in the allele-specific expression (ASE) step
+This could be executed by initiating a single-line command. One exemplar command is:
+```
+# bash ./bin/allele_specific_expression.sh ‐a SA ‐b SB ‐c allelepairs.count_selected.txt ‐t allelepairs.tpm_selected.txt ‐s 21
 ```
 
 |Parameter|Description|
