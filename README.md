@@ -33,6 +33,7 @@
 **[ Rule for allele-pair identification ]**
 
 (1) 3σ rule is used for allele-pair identification, please refer to its original publication for details [(Lehmann, 2013)](https://ascelibrary.org/doi/abs/10.1061/(ASCE)SU.1943-5428.0000112). 
+
 (2) Tukey’s method is an acclaimed and straightforward graphical technique known forrepresenting continuous univariate data through a boxplot. This method calculates the upper and lower extremes of the data through the quartile.
   
 ## 2 Installation
