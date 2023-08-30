@@ -1,5 +1,5 @@
 # Allele_auto
-## **A pipeline for allele identification and allele-specific gene expression.**
+## **A pipeline for allele identification and allelespecific gene expression with haplotype-resolved diploid genome assembly.**
 
 **Version:** 1.0.0
 
@@ -32,7 +32,8 @@
 
 **[ Rule for allele-pair identification ]**
 
-  3σ rule was used for allele-pair identification, please refer to its original publication for details [(Lehmann, 2013)](https://ascelibrary.org/doi/abs/10.1061/(ASCE)SU.1943-5428.0000112). 
+(1) 3σ rule is used for allele-pair identification, please refer to its original publication for details [(Lehmann, 2013)](https://ascelibrary.org/doi/abs/10.1061/(ASCE)SU.1943-5428.0000112). 
+(2) Tukey’s method is an acclaimed and straightforward graphical technique known forrepresenting continuous univariate data through a boxplot. This method calculates the upper and lower extremes of the data through the quartile.
   
 ## 2 Installation
 ### 2.1 Dependencies
@@ -41,62 +42,65 @@ Genetribe: https://github.com/chenym1/genetribe
 
 WGDI: https://github.com/SunPengChuan/wgdi
 
-#Please refer to the respective links, for the installation of these abovementioned softwares.
+#Please refer to the respective links, for the installation of these abovementioned software.
 
 ### 2.2 Installation
 
-1. Download the latest version of Allele_auto from Github. We only provide Linux 64-bit version.
+**2.2.1. Download the latest version of Allele_auto from Github. We only provide Linux 64-bit version.**
 
-`git clone https://github.com/shitianle77/Allele_auto.git`
+`# git clone https://github.com/shitianle77/Allele_auto.git`
 
-2. Adding the environment variables to your system PATH, if necessary.
-
+**2.2.2. Adding the environment variables to your system PATH, if necessary.**
 Change your PATH following these steps.
 
-`vi ~/.bash_profile`
+`# vi ~/.bash_profile`
 
-add Genetribe, WGDI and R environments to ~/.bash_profile (eg: export PATH=/home/tlshi/software/genetribe:$PATH).
-
+add Genetribe, WGDI and R environments to ~/.bash_profile (eg: export PATH=/home/tls/genetribe:$PATH).
 Then apply the changes in your PATH, with this command.
 
-`source ~/.bash_profile`
+`# source ~/.bash_profile`
 
 Download and install the required R packages (DESeq2, ggplot2) by executing the following code in your R console.
 
-`install.packages(c(“DESeq2”, “ggplot2”))`
+`# install.packages(c(“DESeq2”, “ggplot2”))`
 
-3. Get helps on Allele_auto.
+**2.2.3. Get helps on Allele_auto.**
 ```
-cd Allele_auto
-bash ./bin/allele_identification.sh -h
-bash ./bin/allele_specific_expression.sh -h
+# cd Allele_auto
+# bash ./bin/allele_identification.sh -h
+# bash ./bin/allele_specific_expression.sh -h
 ```
 
 ## 3 Quick Start
 
-We have stored the ginger sample data in the test folder. In this tutorial, we illustrate the procedures for conducting elementary calculations utilizing this pipeline. Our objective is to assist users in rapidly familiarizing themselves with functions of the pipeline.
+We provide example files in the test folder. Here we show steps on running a simple computation with this
+pipeline. We expect this may help users to quickly get familiar with this pipeline.
 
 ```
-cd Allele_auto
-ls
-# 00_data 01_genetribe 02_wgdi 03_DEG bin
+# cd Allele_auto
+# ls
+00_data 01_genetribe 02_wgdi 02_wgdi‐Tukey  03_DEG bin
 ```
 
-The software is divided into two main sections, allele identification and allele-specific gene expression. All the input data are under the directory 00_data. You can keep only the directories 00_data and bin and then execute the following lines to get the results of the example data.
+The software is divided into two main sections, allele identification and allele-specificgene expression. All
+the input data are under the directory 00_data. You can keep only the directories 00_data and bin and then
+execute the following lines to get the results of the example data.
 
 Before the official start, users need to modify them:
 
 (1)	Once genetribe has been successfully installed, you will need to go into the ~/genetribe/bin directory and modify the penultimate line in core to add the “#”.
 ```
-sed -i 's/rm -rf output/#rm -rf output/'  yourgenetribepath/genetribe/bin/core
+# sed -i 's/rm -rf output/#rm -rf output/'  yourgenetribepath/genetribe/bin/core
 ```
-
 (2)	In the script ./bin/allele_identification.sh, 195 lines need to be replaced with the user's environment.
 
 ```
-bash ./bin/allele_identification.sh -p chrpairs.txt -a SA -b SB
-bash ./bin/allele_specific_expression.sh -a SA -b SB -c allelepairs.count_selected.txt -t allelepairs.tpm_selected.txt -s 102
+# bash ./bin/allele_identification.sh ‐p Zo_chrpairs.txt ‐a Zo_SA ‐b Zo_SB
+# bash ./bin/allele_specific_expression.sh ‐a Zo_SA ‐b Zo_SB ‐c allelepairs.count_selected.txt ‐t allelepairs.tpm_selected.txt ‐s 21
 ```
+Note: After obtaining the RBH gene pair (after running bash allele_identification.sh -p Zo_chrpairs.txt -a
+Zo_SA -b Zo_SB), we also provided another way to filter alleles through a single line of code: bash
+./bin/allele_filtering.sh - p Zo_chrpairs.txt - a Zo_SA- b Zo_SB.
 
 ## 4 Input and output
 
