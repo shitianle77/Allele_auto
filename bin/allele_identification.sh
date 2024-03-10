@@ -229,7 +229,7 @@ blockfile=`ls block.tsv`
 
 #3.3.1 Removal of homologous gene pairs with outlying ks values
 ##Calculate the mean and standard deviation(sd) from the data distribution of pair
-mean=`cat ${pairfile}|awk -F "\t" 'NR>1{if($$10>0) print $10}'|grep -v "NA"|awk '{x[NR]=$0; s+=$0; n++} END{a=s/n; print a}' `
+mean=`cat ${pairfile}|awk -F "\t" 'NR>1{if($10>0) print $10}'|grep -v "NA"|awk '{x[NR]=$0; s+=$0; n++} END{a=s/n; print a}' `
 sd=`cat ${pairfile}|awk -F "\t" 'NR>1{if($10>0) print $10}'|grep -v "NA"|awk '{x[NR]=$0; s+=$0; n++} END{a=s/n; for (i in x){ss += (x[i]-a)^2} sd = sqrt(ss/n); print sd}' `
 
 ##Filtering blocks using mean and sd
